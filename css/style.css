@@ -1,1 +1,140 @@
 
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    height:100vh;
+    background:linear-gradient(to top,#ffdde1,#ee9ca7);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
+/* ===== GREETING PAGE ===== */
+.greetings span{
+    font-size:4rem;
+    font-weight:bold;
+    color:white;
+    animation: glow 2s infinite alternate;
+}
+
+.greetings span:nth-child(odd){
+    animation-delay: .2s;
+}
+
+.description{
+    margin-top:20px;
+    font-size:1.2rem;
+    color:white;
+}
+
+.button{
+    margin-top:30px;
+}
+
+button{
+    padding:12px 30px;
+    border:none;
+    border-radius:20px;
+    background:white;
+}
+
+button a{
+    text-decoration:none;
+    color:#ee9ca7;
+    font-weight:bold;
+}
+
+/* ===== FLOWER PAGE ===== */
+.flower-page{
+    background:linear-gradient(to top,#c1dfc4,#deecdd);
+    overflow:hidden;
+}
+
+.flower-container{
+    position:relative;
+    width:200px;
+    height:400px;
+}
+
+.flower{
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%) scale(0);
+    animation: grow 3s forwards;
+}
+
+.petal{
+    position:absolute;
+    width:40px;
+    height:80px;
+    background:pink;
+    border-radius:50% 50% 0 0;
+    transform-origin:bottom center;
+    opacity:0;
+    animation: bloom 1s forwards;
+}
+
+.p1{transform:rotate(0deg); animation-delay:.5s;}
+.p2{transform:rotate(60deg); animation-delay:.7s;}
+.p3{transform:rotate(120deg); animation-delay:.9s;}
+.p4{transform:rotate(180deg); animation-delay:1.1s;}
+.p5{transform:rotate(240deg); animation-delay:1.3s;}
+.p6{transform:rotate(300deg); animation-delay:1.5s;}
+
+.center{
+    width:30px;
+    height:30px;
+    background:yellow;
+    border-radius:50%;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+}
+
+.stem{
+    width:8px;
+    height:200px;
+    background:green;
+    position:absolute;
+    top:70px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.leaf{
+    width:40px;
+    height:20px;
+    background:green;
+    border-radius:20px;
+    position:absolute;
+}
+
+.l1{top:140px; left:-20px;}
+.l2{top:170px; right:-20px;}
+
+.text{
+    margin-top:30px;
+    color:#444;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes glow{
+    from{text-shadow:0 0 10px white;}
+    to{text-shadow:0 0 30px pink;}
+}
+
+@keyframes grow{
+    to{transform:translateX(-50%) scale(1);}
+}
+
+@keyframes bloom{
+    to{opacity:1;}
+}
