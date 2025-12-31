@@ -1,228 +1,30 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Romantic Bloom Garden</title>
-
-<style>
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-  height:100vh;
-  overflow:hidden;
-  font-family:'Segoe UI', sans-serif;
-  background:linear-gradient(to top, #fce4ec, #e3f2fd);
-}
-
-/* ===== OPEN SCREEN ===== */
-#startScreen {
-  position:fixed;
-  inset:0;
-  background:radial-gradient(circle, #fff0f5, #e1f5fe);
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  z-index:10;
-}
-
-#startScreen h1 {
-  font-size:2.3rem;
-  color:#ad1457;
-  margin-bottom:30px;
-  text-align:center;
-}
-
-#openBtn {
-  padding:15px 45px;
-  font-size:1.3rem;
-  border:none;
-  border-radius:50px;
-  background:linear-gradient(45deg,#ff80ab,#82b1ff);
-  color:white;
-  cursor:pointer;
-  box-shadow:0 12px 25px rgba(0,0,0,0.3);
-}
-
-/* ===== GARDEN ===== */
-#garden {
-  position:absolute;
-  inset:0;
-  display:none;
-}
-
-/* ===== FLOWER ===== */
-.flower {
-  position:absolute;
-  width:70px;
-  height:70px;
-  transform:scale(0);
-  animation:grow 3s ease forwards, wind 6s ease-in-out infinite;
-}
-
-.center {
-  position:absolute;
-  width:20px;
-  height:20px;
-  background:#fff9c4;
-  border-radius:50%;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  z-index:3;
-  box-shadow:0 0 20px rgba(255,255,255,1);
-}
-
-.petal {
-  position:absolute;
-  width:20px;
-  height:38px;
-  top:5px;
-  left:50%;
-  border-radius:50% 50% 0 0;
-  transform-origin:bottom center;
-  opacity:0;
-  animation:bloom 0.8s forwards;
-}
-
-.stem {
-  position:absolute;
-  width:6px;
-  height:120px;
-  background:#2e7d32;
-  top:70px;
-  left:50%;
-  transform:translateX(-50%);
-  border-radius:6px;
-}
-
-/* ===== BUTTERFLY ===== */
-.butterfly {
-  position:absolute;
-  font-size:28px;
-  animation:fly 10s linear infinite;
-}
-
-/* ===== PARTICLE HEART ===== */
-.heart {
-  position:absolute;
-  font-size:14px;
-  animation:floatUp 2.5s ease-out forwards;
-}
-
-/* ===== ANIMATIONS ===== */
-@keyframes grow {
-  to { transform:scale(1); }
-}
-
-@keyframes bloom {
-  to { opacity:1; }
-}
-
-@keyframes wind {
-  0% { transform:rotate(0deg); }
-  50% { transform:rotate(2deg); }
-  100% { transform:rotate(0deg); }
-}
-
-@keyframes fly {
-  0% { transform:translateX(-10vw) translateY(10vh); }
-  100% { transform:translateX(110vw) translateY(-20vh); }
-}
-
-@keyframes floatUp {
-  to {
-    transform:translateY(-80px);
-    opacity:0;
-  }
-}
-
-/* ===== RESPONSIVE ===== */
-@media(max-width:600px){
-  .flower { transform:scale(0.85); }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="img/flowers.png" type="image/x-icon">
+    <title>Flowers</title>
 </head>
-
 <body>
+    <div class="greetings">
+        <span>H</span>
+        <span>A</span>
+        <span>L</span>
+        <span>L</span>
+        <span>O</span>
+    </div>
 
-<!-- MUSIC -->
-<audio id="music" loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5c3d5e9b1c.mp3" type="audio/mpeg">
-</audio>
+    <div class="description">
+        <span>Aku ada hadiah spesial buat kamu!!</span>
+    </div>
 
-<!-- OPEN -->
-<div id="startScreen">
-  <h1>🌸 Romantic Bloom Garden 🌸</h1>
-  <button id="openBtn">OPEN</button>
-</div>
-
-<div id="garden"></div>
-
-<script>
-const garden = document.getElementById("garden");
-const start = document.getElementById("startScreen");
-const music = document.getElementById("music");
-
-document.getElementById("openBtn").onclick = () => {
-  start.style.display = "none";
-  garden.style.display = "block";
-  music.play();
-  createFlowers(14);
-  createButterflies(3);
-};
-
-function createFlowers(n){
-  for(let i=0;i<n;i++){
-    const flower = document.createElement("div");
-    flower.className="flower";
-    flower.style.left=Math.random()*90+"%";
-    flower.style.bottom=Math.random()*10+"%";
-    flower.style.animationDelay=i*0.3+"s";
-
-    const pink = Math.random()>0.5;
-    const grad = pink
-      ? "linear-gradient(to top, #ff80ab, #ffc1e3)"
-      : "linear-gradient(to top, #82b1ff, #cfd8ff)";
-
-    for(let j=0;j<6;j++){
-      const p=document.createElement("div");
-      p.className="petal";
-      p.style.background=grad;
-      p.style.transform=`rotate(${j*60}deg) translateX(-50%)`;
-      p.style.animationDelay=(j*0.3)+"s";
-      flower.appendChild(p);
-    }
-
-    flower.innerHTML += `<div class="center"></div><div class="stem"></div>`;
-
-    flower.onclick = (e)=> createHeart(e.pageX,e.pageY);
-    garden.appendChild(flower);
-  }
-}
-
-function createButterflies(n){
-  for(let i=0;i<n;i++){
-    const b=document.createElement("div");
-    b.className="butterfly";
-    b.innerHTML="🦋";
-    b.style.top=Math.random()*50+"%";
-    b.style.animationDelay=i*3+"s";
-    garden.appendChild(b);
-  }
-}
-
-function createHeart(x,y){
-  const h=document.createElement("div");
-  h.className="heart";
-  h.innerHTML="💖";
-  h.style.left=x+"px";
-  h.style.top=y+"px";
-  garden.appendChild(h);
-  setTimeout(()=>h.remove(),2500);
-}
-</script>
-
+    <div class="button">
+        <button>
+            <a href="flower.html">Klik disini</a>
+        </button>
+    </div>
 </body>
 </html>
